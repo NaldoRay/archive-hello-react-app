@@ -19,19 +19,33 @@ export default class HelloReactApp extends Component
 		super(props);
 		const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
 		this.state = {
-			dataSource: ds.cloneWithRows([
-				'John', 'Joel', 'James', 'Jimmy', 'Jackson', 'Jillian', 'Julie', 'Devin'
-			])
+			jsonURL: 'https://facebook.github.io/react-native/movies.json',
+			dataSource: ds.cloneWithRows([])
 		};
 	}
 	
-	render() 
+	
+	componentDidMount ()
+	{
+		fetch(this.state.jsonURL)
+			.then((response) => {console.log(response); return response.json()})
+			.then((responseJson) => {
+				
+				this.setState({ dataSource: this.state.dataSource.cloneWithRows(responseJson.movies) });
+			})
+			.catch((error) => {
+				console.error(error);
+			});
+	}
+	
+	
+	render () 
 	{
 		return (
 			<View style={{flex: 1, paddingTop: 22}}>
 				<ListView
 					dataSource={this.state.dataSource}
-					renderRow={(rowData) => <Text>{rowData}</Text>}
+					renderRow={(rowData) => <Text>{rowData.title} ({rowData.releaseYear})</Text>}
 				/>
 			</View>
 		);
