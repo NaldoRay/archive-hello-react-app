@@ -14,14 +14,12 @@ export default class HelloReactApp extends Component
 {
 	render () 
 	{
-		let pic = {
-		  uri: 'https://upload.wikimedia.org/wikipedia/commons/d/de/Bananavarieties.jpg'
-		};
 		return (
-			<View style={{flex: 1}}>
-				<View style={{flex: 1, backgroundColor: 'powderblue'}} />
-				<View style={{flex: 2, backgroundColor: 'skyblue'}} />
-				<View style={{flex: 3, backgroundColor: 'steelblue'}} />
+			// Try setting `flexDirection` to `column`.
+			<View style={{flex: 1, flexDirection: 'row'}}>
+				<View style={{width: 50, height: 50, backgroundColor: 'powderblue'}} />
+				<View style={{width: 50, height: 50, backgroundColor: 'skyblue'}} />
+				<View style={{width: 50, height: 50, backgroundColor: 'steelblue'}} />
 			</View>
 		);
 	}
